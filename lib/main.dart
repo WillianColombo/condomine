@@ -2,18 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:campominado/models/tabuleiro.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false, //retira o rótulo "debug" da AppBar
       home: Scaffold(
         appBar: AppBar(
-          title: Text('Grade de Botões'),
+          title: const Text('CONDOMINE'),
         ),
-        body: Tabuleiro(), // Utiliza o novo widget personalizado
+        body: Tabuleiro(), // Vincula o tabuleiro a tela
       ),
     );
   }
