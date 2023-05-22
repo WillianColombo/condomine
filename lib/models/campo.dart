@@ -16,11 +16,14 @@ class Campo extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
       style: ButtonStyle(
-        fixedSize: MaterialStateProperty.all(const Size(100, 100))
-      ),
+        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+          RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(0),
+          ),
+        ),
+      ),    
       onPressed: _abrir, 
       child: const Text("0")
-
     );
   }
 }
