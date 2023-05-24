@@ -1,10 +1,11 @@
 import 'package:campominado/models/campo.dart';
 import 'package:flutter/material.dart';
+import 'package:window_manager/window_manager.dart';
 
   class Tabuleiro extends StatelessWidget {
     Tabuleiro({super.key});
 
-    //final int _linhas = 20; //Define o número de linhas para o tabuleiro
+    final int _linhas = 20; //Define o número de linhas para o tabuleiro
     final int _colunas = 20; //Define o número de colunas para o tabuleiro
     int columnCount = 0;
   
@@ -24,10 +25,11 @@ import 'package:flutter/material.dart';
     padding: const EdgeInsets.all(8.0),
     child: GridView.builder(
       shrinkWrap: true,
-     // physics: const NeverScrollableScrollPhysics(),
+      //physics: const NeverScrollableScrollPhysics(),
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: _colunas,
       ),
+      itemCount: _linhas * _colunas,
       itemBuilder: (context, position) {
         return Campo();
       },
