@@ -1,37 +1,40 @@
 import 'package:campominado/models/campo.dart';
 import 'package:flutter/material.dart';
-import 'package:window_manager/window_manager.dart';
 
-  class Tabuleiro extends StatelessWidget {
-    Tabuleiro({super.key});
-
-    final int _linhas = 20; //Define o número de linhas para o tabuleiro
-    final int _colunas = 20; //Define o número de colunas para o tabuleiro
-    int columnCount = 0;
+  class Tabuleiro extends StatefulWidget {
+    const Tabuleiro({super.key});
   
     @override
+    State<Tabuleiro> createState() => _TabuleiroState();
+  }
+  
+  class _TabuleiroState extends State<Tabuleiro> {
+    final int _linhas = 17; //Define o número de linhas para o tabuleiro
+    final int _colunas = 30; //Define o número de colunas para o tabuleiro
+
+    int i = 0;
+    int j = 0;
+
+    @override
     Widget build(BuildContext context) {
-      Size screenSize = MediaQuery.of(context).size;
-
-      double proporcao = screenSize.width*0.8/screenSize.height;
-      print(proporcao);
-      print("Altura: ${screenSize.height}");
-      print("Largura: ${screenSize.width*0.8}");
-
-  return Container(
-    height: screenSize.height,
-    width: screenSize.width*0.8,
-    color: Colors.grey[200],
-    padding: const EdgeInsets.all(8.0),
+      Size screenSize = MediaQuery.of(context).size; //Recebe a proporção de tela do dispositivo
+      
+      return Container(
+    height: screenSize.height, //Define a altura do container
+    width: screenSize.width*0.8, //Define a largura do container
+    //color: Color.fromARGB(255, 255, 255, 255),
+    padding: const EdgeInsets.all(45.0),
     child: GridView.builder(
       shrinkWrap: true,
-      //physics: const NeverScrollableScrollPhysics(),
+      //physics: const NeverScrollableScrollPhysics(), //Impede a utilização do scroll
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: _colunas,
+        crossAxisCount: _colunas, //Define o número de colunas do GridView com base no _colunas
       ),
-      itemCount: _linhas * _colunas,
+      itemCount: _linhas * _colunas, //Define o número de campos
       itemBuilder: (context, position) {
-        return Campo();
+        i++;
+        j++;
+        return  Campo(i, j);
       },
     ),
   );

@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
         appBar: AppBar(
           title: const Text('CONDOMINE'),
         ),
-        body: Tabuleiro(), // Vincula o tabuleiro a tela
+        body: const Tabuleiro(), // Vincula o tabuleiro a tela
       ),
     );
   }
