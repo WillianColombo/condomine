@@ -15,18 +15,36 @@ class Campo extends StatefulWidget {
 class _CampoState extends State<Campo> {
   bool _minado = false;
   bool _aberto = false;
+  bool _flag = false;
   int qtdBombasAdj = 0;
+  int num = 0;
 
-  void _abrir(){
-    print("Abrir");
-    _aberto = true;
-
-    if(_aberto = true) {
-      Text("1");
-      print("Mudar");
+  void _abrir(){ //Método que abre os campos
+    if(_flag == false){ //Proteção contra miss click
+      if(_minado == false && _aberto == false){
+        _aberto = true;
+        setState(() {
+          num = 1;
+        });
+      } else if(_minado == true){
+        setState(() {
+          num = 9;
+        });
+      }
     }
-    
-    
+  }
+
+  void _alternarFlag(){
+    if(_aberto == false){
+      _flag =! _flag;
+      setState(() {
+        if(_flag == true){
+          num = 8;
+        } else {
+          num = 0;
+        }
+      });
+    }
   }
 
   @override
@@ -39,8 +57,9 @@ class _CampoState extends State<Campo> {
           ),
         ),
       ),    
-      onPressed: _abrir, 
-      child: const Text("0")
+      onPressed: _abrir,
+      onLongPress: _alternarFlag,
+      child: Text("$num")
     );
   }
 }

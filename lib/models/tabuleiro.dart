@@ -13,7 +13,7 @@ import 'package:flutter/material.dart';
     final int _colunas = 30; //Define o número de colunas para o tabuleiro
 
     int i = 0;
-    int j = 0;
+    int j = -1;
 
     @override
     Widget build(BuildContext context) {
@@ -32,8 +32,12 @@ import 'package:flutter/material.dart';
       ),
       itemCount: _linhas * _colunas, //Define o número de campos
       itemBuilder: (context, position) {
-        i++;
         j++;
+        if (j == _colunas) {
+          i++;
+          j = 0;
+        }
+
         return  Campo(i, j);
       },
     ),
