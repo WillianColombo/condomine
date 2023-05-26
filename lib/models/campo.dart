@@ -26,6 +26,7 @@ class _CampoState extends State<Campo> {
         setState(() {
           num = 1;
         });
+        print("${widget._numLinha}/${widget._numColuna}"); //Mostrando as coordenadas, apagar depois
       } else if(_minado == true){
         setState(() {
           num = 9;

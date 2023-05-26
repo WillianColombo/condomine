@@ -12,8 +12,8 @@ import 'package:flutter/material.dart';
     final int _linhas = 17; //Define o número de linhas para o tabuleiro
     final int _colunas = 30; //Define o número de colunas para o tabuleiro
 
-    int i = 0;
-    int j = -1;
+    int i = 0; // Contador referente as linhas
+    int j = -1; //Contador referente as coluanas
 
     @override
     Widget build(BuildContext context) {
@@ -26,7 +26,6 @@ import 'package:flutter/material.dart';
     padding: const EdgeInsets.all(45.0),
     child: GridView.builder(
       shrinkWrap: true,
-      //physics: const NeverScrollableScrollPhysics(), //Impede a utilização do scroll
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: _colunas, //Define o número de colunas do GridView com base no _colunas
       ),
@@ -37,8 +36,7 @@ import 'package:flutter/material.dart';
           i++;
           j = 0;
         }
-
-        return  Campo(i, j);
+        return  Campo(j, i); //Retorna a coordenada do campo na matriz
       },
     ),
   );
