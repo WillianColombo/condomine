@@ -11,9 +11,16 @@ import 'package:flutter/material.dart';
   class _TabuleiroState extends State<Tabuleiro> {
     final int _linhas = 17; //Define o número de linhas para o tabuleiro
     final int _colunas = 30; //Define o número de colunas para o tabuleiro
+    List<List<Campo>> tabuleiro = []; // Lista para armazenar os campos
 
     int i = 0; // Contador referente as linhas
     int j = -1; //Contador referente as coluanas
+
+    bool sortearMinas(){
+      
+      
+      return true;
+    }
 
     @override
     Widget build(BuildContext context) {
@@ -36,6 +43,8 @@ import 'package:flutter/material.dart';
           i++;
           j = 0;
         }
+        tabuleiro.add;
+        
         return  Campo(j, i); //Retorna a coordenada do campo na matriz
       },
     ),
