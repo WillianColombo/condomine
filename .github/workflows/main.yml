@@ -58,4 +58,4 @@ jobs:
         with:
           artifacts: "build/linux/x64/release/bundle/condomine-linux.zip"
           token: ${{ secrets.GITHUB_TOKEN }}
-          tag: v1.0.${{ github.run_number }}
+          tag: v1.0.${{ github.run_number }}l
