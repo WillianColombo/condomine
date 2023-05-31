@@ -13,21 +13,25 @@ class Campo extends StatefulWidget {
 }
 
 class _CampoState extends State<Campo> {
-  bool _minado = false;
+  bool minado = false;
   bool _aberto = false;
   bool _flag = false;
   int qtdBombasAdj = 0;
   int num = 0;
 
+  void minar(){
+    minado = true;
+  }
+
   void _abrir(){ //Método que abre os campos
     if(_flag == false){ //Proteção contra miss click
-      if(_minado == false && _aberto == false){
+      if(minado == false && _aberto == false){
         _aberto = true;
         setState(() {
           num = 1;
         });
         print("${widget._numLinha}/${widget._numColuna}"); //Mostrando as coordenadas, apagar depois
-      } else if(_minado == true){
+      } else if(minado == true){
         setState(() {
           num = 9;
         });

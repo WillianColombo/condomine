@@ -1,3 +1,4 @@
+import 'dart:math';
 import 'package:campominado/models/campo.dart';
 import 'package:flutter/material.dart';
 
@@ -11,14 +12,35 @@ import 'package:flutter/material.dart';
   class _TabuleiroState extends State<Tabuleiro> {
     final int _linhas = 17; //Define o número de linhas para o tabuleiro
     final int _colunas = 30; //Define o número de colunas para o tabuleiro
-    List<List<Campo>> tabuleiro = []; // Lista para armazenar os campos
+    final int _qtdBombas = 0; //Inicializa a variável que conterá a quantidade de bombas
+
+    List<Campo> tabuleiro = []; // Lista para armazenar os campos
 
     int i = 0; // Contador referente as linhas
     int j = -1; //Contador referente as coluanas
 
+    @override
+  void initState() {
+    qtdBombasTab();
+    super.initState();
+  }
+
+    int qtdBombasTab(){
+      int qtd = (_colunas * _linhas) * 0.2.floor();
+      return qtd;
+    }
+
     bool sortearMinas(){
-      
-      
+      int sorteadas = 0;
+    
+      while(sorteadas < _qtdBombas) {
+        int i = Random().nextInt(tabuleiro.length);
+
+        if(!tabuleiro[i].minado) {
+          sorteadas++;
+          tabuleiro[i].minar();
+        }
+      }
       return true;
     }
 
@@ -43,9 +65,10 @@ import 'package:flutter/material.dart';
           i++;
           j = 0;
         }
-        tabuleiro.add;
+        Campo campo = Campo(j, i);
+        tabuleiro.add(campo);
         
-        return  Campo(j, i); //Retorna a coordenada do campo na matriz
+        return  campo; //Retorna a coordenada do campo na matriz
       },
     ),
   );
