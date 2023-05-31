@@ -36,10 +36,10 @@ import 'package:flutter/material.dart';
       while(sorteadas < _qtdBombas) {
         int i = Random().nextInt(tabuleiro.length);
 
-        if(!tabuleiro[i].minado) {
+        /*if(!tabuleiro[i].minado) {
           sorteadas++;
           tabuleiro[i].minar();
-        }
+        }*/
       }
       return true;
     }
