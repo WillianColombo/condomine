@@ -13,6 +13,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false, //retira o rótulo "debug" da AppBar
       home: Scaffold(
+        
         appBar: AppBar(
           title: const Text('CONDOMINE'),
         ),
