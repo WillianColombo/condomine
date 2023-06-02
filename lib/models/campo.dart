@@ -1,18 +1,9 @@
-import 'package:flutter/material.dart';
+class Campo {
+  int? numColuna;
+  int? numLinha;
 
-class Campo extends StatefulWidget {
-  //Campo({super.key});
+  Campo(this.numColuna, this.numLinha,);
 
-    int? _numColuna;
-    int? _numLinha;
-
-  Campo(this._numColuna, this._numLinha, {super.key});
-
-  @override
-  State<Campo> createState() => _CampoState();
-}
-
-class _CampoState extends State<Campo> {
   bool minado = false;
   bool _aberto = false;
   bool _flag = false;
@@ -23,48 +14,33 @@ class _CampoState extends State<Campo> {
     minado = true;
   }
 
-  void _abrir(){ //Método que abre os campos
+  void abrir(){ //Método que abre os campos
     if(_flag == false){ //Proteção contra miss click
       if(minado == false && _aberto == false){
         _aberto = true;
-        setState(() {
+        //setState(() {
           num = 1;
-        });
-        print("${widget._numLinha}/${widget._numColuna}"); //Mostrando as coordenadas, apagar depois
+        //});
       } else if(minado == true){
-        setState(() {
+        //setState(() {
           num = 9;
-        });
+        //});
       }
     }
   }
 
-  void _alternarFlag(){
+  void alternarFlag(){
     if(_aberto == false){
       _flag =! _flag;
-      setState(() {
+      //setState(() {
         if(_flag == true){
           num = 8;
         } else {
           num = 0;
         }
-      });
+      //});
     }
   }
 
-  @override
-  Widget build(BuildContext context) {
-    return ElevatedButton(
-      style: ButtonStyle(
-        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-          RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(0),
-          ),
-        ),
-      ),    
-      onPressed: _abrir,
-      onLongPress: _alternarFlag,
-      child: Text("$num")
-    );
-  }
+ bool get getMinado => minado;
 }
