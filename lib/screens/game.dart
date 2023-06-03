@@ -1,43 +1,54 @@
+import 'package:campominado/components/resultado_widget.dart';
 import 'package:campominado/components/tabuleiro_widget.dart';
 import 'package:campominado/models/campo.dart';
+import 'package:campominado/models/explosao_exception.dart';
 import 'package:campominado/models/tabuleiro.dart';
 import 'package:flutter/material.dart';
 
 class Game extends StatefulWidget {
-  const Game({super.key});
-
   @override
-  State<Game> createState() => _GameState();
+  _GameState createState() => _GameState();
 }
 
 class _GameState extends State<Game> {
+  int _venceu = 0; // 0 = start | 1 = vitória | 2 = derrota
+  late Tabuleiro _tabuleiro;
 
-  int _resultado = 0; // 0 = start | 1 = vitória | 2 = derrota
-  Tabuleiro _tabuleiro = Tabuleiro (
-    colunas: 0,
-    linhas: 0,
-    qtdBombas: 0
-  );
+  void _reiniciar() {
+    setState(() {
+      _venceu = 0;
+      _tabuleiro.reiniciar();
+    });
+  }
 
   void _abrir(Campo campo) {
-    if (_resultado != 0) {
+    if (_venceu != 0) {
       return;
     }
+
     setState(() {
-      if(campo.getMinado == false) {
+      try {
         campo.abrir();
-      } else {
-        _resultado = 2;
+        if (_tabuleiro.resolvido) {
+          _venceu = 1;
+        }
+      } on ExplosaoException {
+        _venceu = 2;
+        _tabuleiro.revelarBombas();
       }
     });
   }
-  
+
   void _alternarFlag(Campo campo) {
-    if (_resultado != 0) {
+    if (_venceu != 0) {
       return;
     }
+
     setState(() {
       campo.alternarFlag();
+      if (_tabuleiro.resolvido) {
+        _venceu = 1;
+      }
     });
   }
 
@@ -53,15 +64,14 @@ class _GameState extends State<Game> {
       );
     return _tabuleiro;
   }
-  
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false, //retira o rótulo "debug" da AppBar
       home: Scaffold(
-        
-        appBar: AppBar(
-          title: const Text('CONDOMINE'),
+        appBar: ResultadoWidget(
+          venceu: _venceu,
+          onReiniciar: _reiniciar,
         ),
         body: Container(
           color: Colors.grey,

@@ -1,46 +1,99 @@
+import 'package:campominado/models/explosao_exception.dart';
+
 class Campo {
-  int? numColuna;
-  int? numLinha;
+  int coluna; 
+  int linha;
+  final List<Campo> vizinhos = []; //Lista que define os campos adjacentes ao campo em destaque
 
-  Campo(this.numColuna, this.numLinha,);
+  Campo(this.coluna, this.linha,); //Construtor
 
-  bool minado = false;
+  bool _minado = false;
   bool _aberto = false;
   bool _flag = false;
-  int qtdBombasAdj = 0;
-  int num = 0;
+  bool _explodido = false;
 
-  void minar(){
-    minado = true;
-  }
+  void adicionarVizinho(Campo vizinho) { //Adiciona os campos adjacentes ao campo de destaque
+    final deltaLinha = (linha - vizinho.linha).abs();
+    final deltaColuna = (coluna - vizinho.coluna).abs();
 
-  void abrir(){ //Método que abre os campos
-    if(_flag == false){ //Proteção contra miss click
-      if(minado == false && _aberto == false){
-        _aberto = true;
-        //setState(() {
-          num = 1;
-        //});
-      } else if(minado == true){
-        //setState(() {
-          num = 9;
-        //});
-      }
+    if (deltaLinha == 0 && deltaColuna == 0) {
+      return;
+    }
+
+    if (deltaLinha <= 1 && deltaColuna <= 1) {
+      vizinhos.add(vizinho);
     }
   }
 
-  void alternarFlag(){
+  void minar(){ //Método que mina o campo diretamente na variável
+    _minado = true;
+  }
+
+  void reiniciar() { //Reinicia os métodos para que o game possa ser recomeçado
+    _aberto = false;
+    _flag = false;
+    _minado = false;
+    _explodido = false;
+  }
+
+  void revelarBomba() { //Se o campo estiver minado, revela a bomba. Isto ocorre quando o game é perdido
+    if (_minado) {
+      _aberto = true;
+    }
+  }
+
+  void abrir() { //Método que abre o campo
+    if (_aberto) {
+      return;
+    }
+
+    _aberto = true;
+
+    if (_minado) {
+      _explodido = true;
+      throw ExplosaoException();
+    }
+
+    if (vizinhancaSegura) {
+      vizinhos.forEach((v) => v.abrir());
+    }
+  }
+
+  void alternarFlag(){ //Adiciona ou remove a Flag do campo, isto independe de estar minado ou não
     if(_aberto == false){
       _flag =! _flag;
-      //setState(() {
-        if(_flag == true){
-          num = 8;
-        } else {
-          num = 0;
-        }
-      //});
     }
   }
 
- bool get getMinado => minado;
+  //Getters para acessar de fora
+
+  bool get minado {
+    return _minado;
+  }
+
+  bool get explodido {
+    return _explodido;
+  }
+
+  bool get aberto {
+    return _aberto;
+  }
+
+  bool get marcado {
+    return _flag;
+  }
+
+  bool get resolvido { //Getter para saber se o campo esta resolvido
+    bool minadoEMarcado = minado && marcado;
+    bool seguroEAberto = !minado && aberto;
+    return minadoEMarcado || seguroEAberto;
+  }
+
+ bool get vizinhancaSegura { //Getter para saber se tem bombas aos campos adjacentes ao campo de destaque
+    return vizinhos.every((v) => !v.minado);
+  }
+
+  int get qtdeMinasNaVizinhanca { //Quantifica as bombas dos campos adjacentes ao campo de destaque
+    return vizinhos.where((v) => v.minado).length;
+  }
 }
