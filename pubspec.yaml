@@ -31,6 +31,7 @@ dependencies:
   flutter:
     sdk: flutter
   window_manager: ^0.3.4
+  flutter_screenutil: ^5.8.4
 
     
 

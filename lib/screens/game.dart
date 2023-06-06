@@ -12,11 +12,18 @@ class Game extends StatefulWidget {
 
 class _GameState extends State<Game> {
   int _venceu = 0; // 0 = start | 1 = vitória | 2 = derrota
-  late Tabuleiro _tabuleiro;
+  Tabuleiro _tabuleiro = Tabuleiro(colunas: 0,linhas: 0, qtdBombas: 0);
+
+  @override
+  void initState() {
+    super.initState();
+    _tabuleiro = _getTabuleiro(1980, 1020);
+    _reiniciar();
+  }
 
   void _reiniciar() {
     setState(() {
-      _venceu = 0;
+       _venceu = 0;
       _tabuleiro.reiniciar();
     });
   }
@@ -53,14 +60,14 @@ class _GameState extends State<Game> {
   }
 
   Tabuleiro _getTabuleiro(double largura, double altura) {
-      int qtdeColunas = 15;
+      int qtdeColunas = 30;
       double tamanhoCampo = largura / qtdeColunas;
       int qtdeLinhas = (altura / tamanhoCampo).floor();
 
       _tabuleiro = Tabuleiro(
         linhas: qtdeLinhas,
         colunas: qtdeColunas,
-        qtdBombas: 50,
+        qtdBombas: 100,
       );
     return _tabuleiro;
   }
@@ -68,20 +75,18 @@ class _GameState extends State<Game> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: ResultadoWidget(
           venceu: _venceu,
-          onReiniciar: _reiniciar,
+          onReiniciar: () => _reiniciar,
         ),
         body: Container(
           color: Colors.grey,
           child: LayoutBuilder(
             builder: (ctx, constraints) {
               return TabuleiroWidget(
-                tabuleiro: _getTabuleiro(
-                  constraints.maxWidth,
-                  constraints.maxHeight,
-                ),
+                tabuleiro: _tabuleiro,
                 onAbrir: _abrir,
                 onAlternarFlag: _alternarFlag,
               );

@@ -34,6 +34,7 @@ class Tabuleiro {
 
   void revelarBombas() { //Quando o jogo for perdido, revela todos os campos incluindo bombas
     _campos.forEach((c) => c.revelarBomba());
+    print("Revelar bombas");
   }
 
   void _relacionarVizinhos() { //Relaciona os campos com seus vizinhos adjacentes
