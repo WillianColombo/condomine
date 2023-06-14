@@ -17,7 +17,7 @@ class _GameState extends State<Game> {
   @override
   void initState() {
     super.initState();
-    _tabuleiro = _getTabuleiro(1980, 1020);
+    _tabuleiro = _getTabuleiro(1980, 1080);
     _reiniciar();
   }
 
@@ -60,14 +60,17 @@ class _GameState extends State<Game> {
   }
 
   Tabuleiro _getTabuleiro(double largura, double altura) {
-      int qtdeColunas = 30;
+      int qtdeColunas = 29;
       double tamanhoCampo = largura / qtdeColunas;
       int qtdeLinhas = (altura / tamanhoCampo).floor();
+
+      int qtdBombaCalc = ((qtdeLinhas * qtdeColunas) * 0.2).floor(); 
+      //Cria dinamicamente a quantidade de bombas, neste caso, 20% do total de campos
 
       _tabuleiro = Tabuleiro(
         linhas: qtdeLinhas,
         colunas: qtdeColunas,
-        qtdBombas: 100,
+        qtdBombas: qtdBombaCalc,
       );
     return _tabuleiro;
   }
