@@ -1,3 +1,4 @@
+import 'package:campominado/screens/game.dart';
 import 'package:flutter/material.dart';
 
 class MainMenu extends StatefulWidget {
@@ -34,7 +35,7 @@ class _MainMenuState extends State<MainMenu> {
                 height: 50,
                 margin: const EdgeInsets.all(16.0),
                 child: ElevatedButton(
-                  onPressed: () => null,
+                  onPressed: () => Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => Game())),
                   child: const Text("Jogar"),
                   style: ButtonStyle(
                     backgroundColor: MaterialStateProperty.resolveWith<Color?>((states) { return Color.fromARGB(255, 109, 54, 35);})

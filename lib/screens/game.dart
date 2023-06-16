@@ -1,3 +1,4 @@
+import 'package:campominado/components/app_bar.dart';
 import 'package:campominado/components/resultado_widget.dart';
 import 'package:campominado/components/tabuleiro_widget.dart';
 import 'package:campominado/models/campo.dart';
@@ -80,10 +81,7 @@ class _GameState extends State<Game> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        appBar: ResultadoWidget(
-          venceu: _venceu,
-          onReiniciar: () => _reiniciar,
-        ),
+        appBar: MyAppBar(onReiniciar: () => _reiniciar),
         body: Container(
           color: Colors.grey,
           child: LayoutBuilder(
