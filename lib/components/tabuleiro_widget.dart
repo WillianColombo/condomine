@@ -1,5 +1,6 @@
 import 'package:campominado/components/campo_widget.dart';
 import 'package:campominado/models/campo.dart';
+import 'package:campominado/models/dificuldade.dart';
 import 'package:flutter/material.dart';
 import 'package:campominado/models/tabuleiro.dart';
 

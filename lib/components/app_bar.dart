@@ -16,12 +16,11 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget  {
       backgroundColor: const Color.fromARGB(255, 199, 147, 128),
       leading: ElevatedButton(
               onPressed: () => Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const MainMenu())),
-              child: const Text("Menu Iniciar"),
+              child: const Icon(Icons.home),
               style: ButtonStyle(
                     backgroundColor: MaterialStateProperty.resolveWith<Color?>((states) { return const Color.fromARGB(255, 109, 54, 35);})
                   ),
             ),
-            leadingWidth: 75,
       actions: [
             ElevatedButton(
               onPressed: onReiniciar(), 
@@ -34,6 +33,5 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget  {
   }
   
   @override
-  // TODO: implement preferredSize
   Size get preferredSize => const Size.fromHeight(55);
 }

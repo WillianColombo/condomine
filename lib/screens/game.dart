@@ -1,7 +1,7 @@
 import 'package:campominado/components/app_bar.dart';
-import 'package:campominado/components/resultado_widget.dart';
 import 'package:campominado/components/tabuleiro_widget.dart';
 import 'package:campominado/models/campo.dart';
+import 'package:campominado/models/dificuldade.dart';
 import 'package:campominado/models/explosao_exception.dart';
 import 'package:campominado/models/tabuleiro.dart';
 import 'package:flutter/material.dart';
@@ -18,9 +18,11 @@ class _GameState extends State<Game> {
   @override
   void initState() {
     super.initState();
-    _tabuleiro = _getTabuleiro(1980, 1080);
+    _tabuleiro = _getTabuleiro(1920, 1080);
     _reiniciar();
   }
+
+
 
   void _reiniciar() {
     setState(() {
@@ -63,7 +65,7 @@ class _GameState extends State<Game> {
   Tabuleiro _getTabuleiro(double largura, double altura) {
       int qtdeColunas = 29;
       double tamanhoCampo = largura / qtdeColunas;
-      int qtdeLinhas = (altura / tamanhoCampo).floor();
+      int qtdeLinhas = ((altura / tamanhoCampo) - 2).floor();
 
       int qtdBombaCalc = ((qtdeLinhas * qtdeColunas) * 0.2).floor(); 
       //Cria dinamicamente a quantidade de bombas, neste caso, 20% do total de campos

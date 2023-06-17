@@ -47,14 +47,49 @@ class _MainMenuState extends State<MainMenu> {
                 height: 50,
                 margin: const EdgeInsets.all(16.0),
                 child: ElevatedButton(
-                  onPressed: () => null,
+                  onPressed: () => showMenu(
+
+                    context: context, 
+                    position: RelativeRect.fromLTRB(0, 600, 0, 0), 
+                    items: [
+                      const PopupMenuItem<String>(
+                        value: 'opcao1',
+                        child: Row(
+                          children: [
+                            Icon(Icons.check_circle_outline),
+                            SizedBox(width: 10),
+                            Text('Fácil'),
+                          ],
+                        ),
+                      ),
+                      const PopupMenuItem<String>(
+                        value: 'opcao2',
+                        child: Row(
+                          children: [
+                            Icon(Icons.check_circle_outline),
+                            SizedBox(width: 10),
+                            Text('Médio'),
+                          ],
+                        ),
+                      ),
+                      const PopupMenuItem<String>(
+                        value: 'opcao3',
+                        child: Row(
+                          children: [
+                            Icon(Icons.check_circle_outline),
+                            SizedBox(width: 10),
+                            Text('Difícil'),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
                   child: const Text("Dificuldade"),
                   style: ButtonStyle(
                     backgroundColor: MaterialStateProperty.resolveWith<Color?>((states) { return Color.fromARGB(255, 109, 54, 35);})
                   )
                 ),
               ),
-              
             ],
           ),
         ),
