@@ -1,4 +1,3 @@
-import 'package:campominado/components/dificuldade_widget.dart';
 import 'package:campominado/screens/game.dart';
 import 'package:flutter/material.dart';
 
@@ -12,7 +11,7 @@ class MainMenu extends StatefulWidget {
 class _MainMenuState extends State<MainMenu> {
   @override
 
-  String dificuldade = "Médio";
+  String _dificuldade = "Médio";
 
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -38,11 +37,14 @@ class _MainMenuState extends State<MainMenu> {
                 height: 50,
                 margin: const EdgeInsets.all(16.0),
                 child: ElevatedButton(
-                  onPressed: () => Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => Game(nivel: dificuldade,))),
+                  onPressed: () => Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => Game(nivel: _dificuldade,))),
                   style: ButtonStyle(
                     backgroundColor: MaterialStateProperty.resolveWith<Color?>((states) { return Color.fromARGB(255, 109, 54, 35);}),
                   ),
-                  child: const Text("Jogar"),
+                  child: const Text("Jogar", 
+                  style: TextStyle(
+                    fontSize: 30.0,),),
+                  
                 ),
               ), 
               Container(
@@ -90,15 +92,15 @@ class _MainMenuState extends State<MainMenu> {
                     if (value != null) {
                       if (value == 'facil') {
                         setState(() {
-                          dificuldade = "Fácil";
+                          _dificuldade = "Fácil";
                         });
                       } else if (value == 'medio') {
                         setState(() {
-                          dificuldade = "Médio";
+                          _dificuldade = "Médio";
                         });
                       } else if (value == 'dificil') {
                         setState(() {
-                          dificuldade = "Difícil";
+                          _dificuldade = "Difícil";
                         });
                       }
                     }
@@ -106,7 +108,10 @@ class _MainMenuState extends State<MainMenu> {
                   style: ButtonStyle(
                     backgroundColor: MaterialStateProperty.resolveWith<Color?>((states) { return const Color.fromARGB(255, 109, 54, 35);})
                   ),
-                  child: Text("Dificuldade: $dificuldade"),
+                  child: Text("Dificuldade: $_dificuldade",
+                  style: const TextStyle(
+                    fontSize: 30.0,),
+                  ),
                 ),
     ),
             ],

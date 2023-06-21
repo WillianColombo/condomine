@@ -25,9 +25,9 @@ class _GameState extends State<Game> {
   @override
   void initState() {
     super.initState();
+    getDificuldade();
     _tabuleiro = _getTabuleiro(1920, 1080);
     _reiniciar();
-    getDificuldade();
   }
 
 
@@ -73,22 +73,27 @@ class _GameState extends State<Game> {
   Dificuldade getDificuldade(){
   
     if(nivel == "Fácil"){
-      return dificuldade!.facil();
+      dificuldade.colunas = 29;
+      dificuldade.menosLinhas = 2;
+      dificuldade.qtdBombas = 0.15;
     } else if(nivel == "Médio"){
-      dificuldade!.medio();
+      dificuldade.colunas = 40;
+      dificuldade.menosLinhas = 3;
+      dificuldade.qtdBombas = 0.2;
     } else{
-      dificuldade!.dificil();
+      dificuldade.colunas = 50;
+      dificuldade.menosLinhas = 4;
+      dificuldade.qtdBombas = 0.3;
     }
     return dificuldade;
   }
 
   Tabuleiro _getTabuleiro(double largura, double altura) {
-      Dificuldade _nivel = dificuldade;
-      int qtdeColunas = _nivel.colunas;
+      int qtdeColunas = dificuldade.colunas;
       double tamanhoCampo = largura / qtdeColunas;
-      int qtdeLinhas = ((altura / tamanhoCampo) - _nivel.menosLinhas).floor();
+      int qtdeLinhas = ((altura / tamanhoCampo) - dificuldade.menosLinhas).floor();
 
-      int qtdBombaCalc = ((qtdeLinhas * qtdeColunas) * _nivel.qtdBombas).floor(); 
+      int qtdBombaCalc = ((qtdeLinhas * qtdeColunas) * dificuldade.qtdBombas).floor(); 
       //Cria dinamicamente a quantidade de bombas, neste caso, 20% do total de campos
 
       _tabuleiro = Tabuleiro(
