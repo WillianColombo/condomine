@@ -7,19 +7,27 @@ import 'package:campominado/models/tabuleiro.dart';
 import 'package:flutter/material.dart';
 
 class Game extends StatefulWidget {
+  String nivel;
+
+  Game({required this.nivel});
   @override
-  _GameState createState() => _GameState();
+  _GameState createState() => _GameState(nivel: nivel);
 }
 
 class _GameState extends State<Game> {
   int _venceu = 0; // 0 = start | 1 = vitória | 2 = derrota
   Tabuleiro _tabuleiro = Tabuleiro(colunas: 0,linhas: 0, qtdBombas: 0);
+  String nivel;
+  Dificuldade dificuldade =  Dificuldade(0,0,0);
+
+  _GameState({required this.nivel});
 
   @override
   void initState() {
     super.initState();
     _tabuleiro = _getTabuleiro(1920, 1080);
     _reiniciar();
+    getDificuldade();
   }
 
 
@@ -62,12 +70,25 @@ class _GameState extends State<Game> {
     });
   }
 
-  Tabuleiro _getTabuleiro(double largura, double altura) {
-      int qtdeColunas = 29;
-      double tamanhoCampo = largura / qtdeColunas;
-      int qtdeLinhas = ((altura / tamanhoCampo) - 2).floor();
+  Dificuldade getDificuldade(){
+  
+    if(nivel == "Fácil"){
+      return dificuldade!.facil();
+    } else if(nivel == "Médio"){
+      dificuldade!.medio();
+    } else{
+      dificuldade!.dificil();
+    }
+    return dificuldade;
+  }
 
-      int qtdBombaCalc = ((qtdeLinhas * qtdeColunas) * 0.2).floor(); 
+  Tabuleiro _getTabuleiro(double largura, double altura) {
+      Dificuldade _nivel = dificuldade;
+      int qtdeColunas = _nivel.colunas;
+      double tamanhoCampo = largura / qtdeColunas;
+      int qtdeLinhas = ((altura / tamanhoCampo) - _nivel.menosLinhas).floor();
+
+      int qtdBombaCalc = ((qtdeLinhas * qtdeColunas) * _nivel.qtdBombas).floor(); 
       //Cria dinamicamente a quantidade de bombas, neste caso, 20% do total de campos
 
       _tabuleiro = Tabuleiro(

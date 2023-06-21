@@ -1,51 +1,18 @@
-import 'package:campominado/components/dificuldade_widget.dart';
-import 'package:campominado/screens/game.dart';
 import 'package:flutter/material.dart';
 
-class MainMenu extends StatefulWidget {
-  const MainMenu({super.key});
+class DificuldadeWidget extends StatefulWidget {
+  const DificuldadeWidget({super.key});
 
   @override
-  State<MainMenu> createState() => _MainMenuState();
+  State<DificuldadeWidget> createState() => _DificuldadeWidgetState();
 }
 
-class _MainMenuState extends State<MainMenu> {
-  @override
-
+class _DificuldadeWidgetState extends State<DificuldadeWidget> {
   String dificuldade = "Médio";
 
+  @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        backgroundColor: const Color.fromARGB(255, 199, 147, 128),
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Container(
-                margin: const EdgeInsets.all(50.0),
-                child: const Text("CONDOMINE",
-                  style: TextStyle(
-                    fontSize: 50.0,
-                    fontWeight: FontWeight.bold,
-                    color:Color.fromARGB(255, 109, 54, 35),
-                  ),
-                ),
-              ),
-              Container(
-                width: 500, 
-                height: 50,
-                margin: const EdgeInsets.all(16.0),
-                child: ElevatedButton(
-                  onPressed: () => Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => Game(nivel: dificuldade,))),
-                  style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.resolveWith<Color?>((states) { return Color.fromARGB(255, 109, 54, 35);}),
-                  ),
-                  child: const Text("Jogar"),
-                ),
-              ), 
-              Container(
+    return Container(
                 width: 500, 
                 height: 50,
                 margin: const EdgeInsets.all(16.0),
@@ -108,11 +75,6 @@ class _MainMenuState extends State<MainMenu> {
                   ),
                   child: Text("Dificuldade: $dificuldade"),
                 ),
-    ),
-            ],
-          ),
-        ),
-      ),
     );
   }
 }
