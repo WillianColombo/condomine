@@ -1,12 +1,27 @@
 import 'package:campominado/screens/main_menu.dart';
 import 'package:flutter/material.dart';
 
-class MyAppBar extends StatelessWidget implements PreferredSizeWidget  {
+class MyAppBar extends StatefulWidget implements PreferredSizeWidget{
   //const MyAppBar({super.key});
 
   final Function onReiniciar; //Método para reiniciar o game, sendo acessado pelo icon na AppBar
 
   MyAppBar({
+    required this.onReiniciar
+  });
+
+  @override
+  Size get preferredSize => const Size.fromHeight(55);
+
+  @override
+  State<MyAppBar> createState() => _MyAppBarState(onReiniciar: onReiniciar);
+}
+
+class _MyAppBarState extends State<MyAppBar> {
+
+  final Function onReiniciar; //Método para reiniciar o game, sendo acessado pelo icon na AppBar
+
+  _MyAppBarState({
     required this.onReiniciar
   });
 
@@ -31,7 +46,4 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget  {
             )]
     );
   }
-  
-  @override
-  Size get preferredSize => const Size.fromHeight(55);
 }
