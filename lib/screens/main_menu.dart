@@ -48,13 +48,14 @@ class _MainMenuState extends State<MainMenu> {
                 ),
               ), 
               Container(
+                decoration: BoxDecoration(color: Colors.amber),
                 width: 500, 
                 height: 50,
                 margin: const EdgeInsets.all(16.0),
                 child: ElevatedButton(
                   onPressed: () => showMenu(
                     context: context, 
-                    position: const RelativeRect.fromLTRB(0, 600, 0, 0), 
+                    position: const RelativeRect.fromLTRB(700, 550, 700, 0), 
                     items: [
                       const PopupMenuItem<String>(
                         value: 'facil',
