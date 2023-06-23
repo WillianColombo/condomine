@@ -1,5 +1,6 @@
 import 'package:campominado/screens/game.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class MainMenu extends StatefulWidget {
   const MainMenu({super.key});
@@ -39,16 +40,15 @@ class _MainMenuState extends State<MainMenu> {
                 child: ElevatedButton(
                   onPressed: () => Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => Game(nivel: _dificuldade,))),
                   style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.resolveWith<Color?>((states) { return Color.fromARGB(255, 109, 54, 35);}),
+                    backgroundColor: MaterialStateProperty.resolveWith<Color?>((states) { return const Color.fromARGB(255, 109, 54, 35);}),
                   ),
-                  child: const Text("Jogar", 
-                  style: TextStyle(
+                  child: Text(AppLocalizations.of(context)!.msg_play, 
+                  style: const TextStyle(
                     fontSize: 30.0,),),
-                  
                 ),
               ), 
               Container(
-                decoration: BoxDecoration(color: Colors.amber),
+                decoration: const BoxDecoration(color: Colors.amber),
                 width: 500, 
                 height: 50,
                 margin: const EdgeInsets.all(16.0),

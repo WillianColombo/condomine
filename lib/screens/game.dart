@@ -109,7 +109,7 @@ class _GameState extends State<Game> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        appBar: MyAppBar(onReiniciar: () => _reiniciar),
+        appBar: MyAppBar(onReiniciar: () => _reiniciar, venceu: _venceu),
         body: Container(
           color: Colors.grey,
           child: LayoutBuilder(
