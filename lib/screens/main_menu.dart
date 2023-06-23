@@ -1,4 +1,4 @@
-import 'package:campominado/screens/game.dart';
+import 'package:condomine/screens/game.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -11,7 +11,6 @@ class MainMenu extends StatefulWidget {
 
 class _MainMenuState extends State<MainMenu> {
   @override
-
   String _dificuldade = "Médio";
 
   Widget build(BuildContext context) {
@@ -25,37 +24,47 @@ class _MainMenuState extends State<MainMenu> {
             children: [
               Container(
                 margin: const EdgeInsets.all(50.0),
-                child: const Text("CONDOMINE",
+                child: const Text(
+                  "CONDOMINE",
                   style: TextStyle(
                     fontSize: 50.0,
                     fontWeight: FontWeight.bold,
-                    color:Color.fromARGB(255, 109, 54, 35),
+                    color: Color.fromARGB(255, 109, 54, 35),
                   ),
                 ),
               ),
               Container(
-                width: 500, 
+                width: 500,
                 height: 50,
                 margin: const EdgeInsets.all(16.0),
                 child: ElevatedButton(
-                  onPressed: () => Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => Game(nivel: _dificuldade,))),
+                  onPressed: () => Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => Game(
+                            nivel: _dificuldade,
+                          ))),
                   style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.resolveWith<Color?>((states) { return const Color.fromARGB(255, 109, 54, 35);}),
+                    backgroundColor:
+                        MaterialStateProperty.resolveWith<Color?>((states) {
+                      return const Color.fromARGB(255, 109, 54, 35);
+                    }),
                   ),
-                  child: Text(AppLocalizations.of(context)!.msg_play, 
-                  style: const TextStyle(
-                    fontSize: 30.0,),),
+                  child: Text(
+                    AppLocalizations.of(context)!.msg_play,
+                    style: const TextStyle(
+                      fontSize: 30.0,
+                    ),
+                  ),
                 ),
-              ), 
+              ),
               Container(
                 decoration: const BoxDecoration(color: Colors.amber),
-                width: 500, 
+                width: 500,
                 height: 50,
                 margin: const EdgeInsets.all(16.0),
                 child: ElevatedButton(
                   onPressed: () => showMenu(
-                    context: context, 
-                    position: const RelativeRect.fromLTRB(700, 550, 700, 0), 
+                    context: context,
+                    position: const RelativeRect.fromLTRB(700, 550, 700, 0),
                     items: [
                       const PopupMenuItem<String>(
                         value: 'facil',
@@ -106,15 +115,18 @@ class _MainMenuState extends State<MainMenu> {
                       }
                     }
                   }),
-                  style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.resolveWith<Color?>((states) { return const Color.fromARGB(255, 109, 54, 35);})
-                  ),
-                  child: Text("Dificuldade: $_dificuldade",
-                  style: const TextStyle(
-                    fontSize: 30.0,),
+                  style: ButtonStyle(backgroundColor:
+                      MaterialStateProperty.resolveWith<Color?>((states) {
+                    return const Color.fromARGB(255, 109, 54, 35);
+                  })),
+                  child: Text(
+                    "Dificuldade: $_dificuldade",
+                    style: const TextStyle(
+                      fontSize: 30.0,
+                    ),
                   ),
                 ),
-    ),
+              ),
             ],
           ),
         ),

@@ -1,24 +1,27 @@
 import 'dart:math';
-import 'package:campominado/models/campo.dart';
+import 'package:condomine/models/campo.dart';
 
 class Tabuleiro {
   int linhas; //Qtd de linhas do tabuleiro
   int colunas; //Qtd de colunas do tabuleiro
   int qtdBombas; //Qtd de bombas do tabuleiro
 
-  Tabuleiro({ //Construtor
+  Tabuleiro({
+    //Construtor
     required this.linhas,
     required this.colunas,
     required this.qtdBombas,
-  }){ //Chamada dos métodos necessários para inicializar
-      gerarTabuleiro();
-      _relacionarVizinhos();
-      _sortearMinas();
-    }
+  }) {
+    //Chamada dos métodos necessários para inicializar
+    gerarTabuleiro();
+    _relacionarVizinhos();
+    _sortearMinas();
+  }
 
   final List<Campo> _campos = []; // Lista para armazenar os campos
 
-  void gerarTabuleiro(){ //Método que cria os dados em memória do tabuleiro. Ou seja, adiciona os campos na matriz
+  void gerarTabuleiro() {
+    //Método que cria os dados em memória do tabuleiro. Ou seja, adiciona os campos na matriz
     for (int linha = 0; linha < linhas; linha++) {
       for (int coluna = 0; coluna < colunas; coluna++) {
         Campo campo = Campo(coluna, linha);
@@ -27,45 +30,50 @@ class Tabuleiro {
     }
   }
 
-  void reiniciar() { //Método que será utilizado para reiniciar o game
-   _campos.forEach((c) => c.reiniciar());
-   _sortearMinas();
+  void reiniciar() {
+    //Método que será utilizado para reiniciar o game
+    _campos.forEach((c) => c.reiniciar());
+    _sortearMinas();
   }
 
-  void revelarBombas() { //Quando o jogo for perdido, revela todos os campos incluindo bombas
+  void revelarBombas() {
+    //Quando o jogo for perdido, revela todos os campos incluindo bombas
     _campos.forEach((c) => c.revelarBomba());
     print("Revelar bombas");
   }
 
-  void _relacionarVizinhos() { //Relaciona os campos com seus vizinhos adjacentes
-    for(var campo in _campos) {
-      for(var vizinho in _campos) {
+  void _relacionarVizinhos() {
+    //Relaciona os campos com seus vizinhos adjacentes
+    for (var campo in _campos) {
+      for (var vizinho in _campos) {
         campo.adicionarVizinho(vizinho);
       }
     }
   }
 
-  void _sortearMinas() { //Sorteia as bombas aleatóriamente, com base na variável qtdBombas
+  void _sortearMinas() {
+    //Sorteia as bombas aleatóriamente, com base na variável qtdBombas
     int sorteadas = 0;
 
-    if(qtdBombas > linhas * colunas) {
+    if (qtdBombas > linhas * colunas) {
       return;
     }
-    while(sorteadas < qtdBombas) {
+    while (sorteadas < qtdBombas) {
       int i = Random().nextInt(_campos.length);
 
-      if(!_campos[i].minado) {
+      if (!_campos[i].minado) {
         sorteadas++;
         _campos[i].minar();
       }
     }
   }
 
-  List<Campo> get campos { //Get da lista de campos, ou seja, o tabuleiro em sí 
+  List<Campo> get campos {
+    //Get da lista de campos, ou seja, o tabuleiro em sí
     return _campos;
   }
 
   bool get resolvido {
     return _campos.every((c) => c.resolvido);
   }
-  }
+}

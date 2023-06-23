@@ -1,16 +1,18 @@
-import 'package:campominado/components/campo_widget.dart';
-import 'package:campominado/models/campo.dart';
-import 'package:campominado/models/dificuldade.dart';
+import 'package:condomine/components/campo_widget.dart';
+import 'package:condomine/models/campo.dart';
+import 'package:condomine/models/dificuldade.dart';
 import 'package:flutter/material.dart';
-import 'package:campominado/models/tabuleiro.dart';
+import 'package:condomine/models/tabuleiro.dart';
 
 class TabuleiroWidget extends StatelessWidget {
-
   Tabuleiro tabuleiro;
-  final void Function(Campo) onAbrir; //Callback da função abrir, acionado pelo onTap do botão
-  final void Function(Campo) onAlternarFlag; //Callback da função alternar Flag, acionado pelo longPress do botão
+  final void Function(Campo)
+      onAbrir; //Callback da função abrir, acionado pelo onTap do botão
+  final void Function(Campo)
+      onAlternarFlag; //Callback da função alternar Flag, acionado pelo longPress do botão
 
-  TabuleiroWidget({ //Construtor
+  TabuleiroWidget({
+    //Construtor
     required this.tabuleiro,
     required this.onAbrir,
     required this.onAlternarFlag,

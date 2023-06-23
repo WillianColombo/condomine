@@ -89,13 +89,13 @@ BEGIN
     BEGIN
         BLOCK "040904e4"
         BEGIN
-            VALUE "CompanyName", "com.example" "\0"
-            VALUE "FileDescription", "campominado" "\0"
+            VALUE "CompanyName", "br.edu.unoesc.piii" "\0"
+            VALUE "FileDescription", "condomine" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "campominado" "\0"
+            VALUE "InternalName", "condomine" "\0"
             VALUE "LegalCopyright", "Copyright (C) 2023 com.example. All rights reserved." "\0"
-            VALUE "OriginalFilename", "campominado.exe" "\0"
-            VALUE "ProductName", "campominado" "\0"
+            VALUE "OriginalFilename", "condomine.exe" "\0"
+            VALUE "ProductName", "condomine" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END
