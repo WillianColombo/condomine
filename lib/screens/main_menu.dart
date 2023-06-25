@@ -10,9 +10,15 @@ class MainMenu extends StatefulWidget {
 }
 
 class _MainMenuState extends State<MainMenu> {
-  @override
-  String _dificuldade = "Médio";
+  List<String> options = [];
+  List<bool>? selectedOptions = <bool>[false, true, false];
 
+  List<String> getOption(BuildContext context){
+    options = [AppLocalizations.of(context)!.msg_easy, AppLocalizations.of(context)!.msg_medium, AppLocalizations.of(context)!.msg_hard ];
+    return options;
+  }
+
+   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
@@ -40,7 +46,7 @@ class _MainMenuState extends State<MainMenu> {
                 child: ElevatedButton(
                   onPressed: () => Navigator.of(context).push(MaterialPageRoute(
                       builder: (context) => Game(
-                            nivel: _dificuldade,
+                            nivel: selectedOptions,
                           ))),
                   style: ButtonStyle(
                     backgroundColor:
@@ -57,75 +63,32 @@ class _MainMenuState extends State<MainMenu> {
                 ),
               ),
               Container(
-                decoration: const BoxDecoration(color: Colors.amber),
+                decoration: const BoxDecoration(color:  Color.fromARGB(255, 109, 54, 35)),
                 width: 500,
                 height: 50,
                 margin: const EdgeInsets.all(16.0),
-                child: ElevatedButton(
-                  onPressed: () => showMenu(
-                    context: context,
-                    position: const RelativeRect.fromLTRB(700, 550, 700, 0),
-                    items: [
-                      const PopupMenuItem<String>(
-                        value: 'facil',
-                        child: Row(
-                          children: [
-                            Icon(Icons.check_circle_outline),
-                            SizedBox(width: 10),
-                            Text('Fácil'),
-                          ],
-                        ),
-                      ),
-                      const PopupMenuItem<String>(
-                        value: 'medio',
-                        child: Row(
-                          children: [
-                            Icon(Icons.check_circle_outline),
-                            SizedBox(width: 10),
-                            Text('Médio'),
-                          ],
-                        ),
-                      ),
-                      const PopupMenuItem<String>(
-                        value: 'dificil',
-                        child: Row(
-                          children: [
-                            Icon(Icons.check_circle_outline),
-                            SizedBox(width: 10),
-                            Text('Difícil'),
-                          ],
-                        ),
-                      ),
-                    ],
-                    elevation: 8.0,
-                  ).then((value) {
-                    if (value != null) {
-                      if (value == 'facil') {
-                        setState(() {
-                          _dificuldade = "Fácil";
-                        });
-                      } else if (value == 'medio') {
-                        setState(() {
-                          _dificuldade = "Médio";
-                        });
-                      } else if (value == 'dificil') {
-                        setState(() {
-                          _dificuldade = "Difícil";
-                        });
-                      }
+                alignment: Alignment.center,
+                child: ToggleButtons(
+                  onPressed: (int index) {
+                  setState(() {
+                    for (int i = 0; i < selectedOptions!.length; i++) {
+                      selectedOptions![i] = i == index;
                     }
-                  }),
-                  style: ButtonStyle(backgroundColor:
-                      MaterialStateProperty.resolveWith<Color?>((states) {
-                    return const Color.fromARGB(255, 109, 54, 35);
-                  })),
-                  child: Text(
-                    "Dificuldade: $_dificuldade",
-                    style: const TextStyle(
-                      fontSize: 30.0,
-                    ),
-                  ),
+                  });
+                },
+                isSelected: selectedOptions!,
+                fillColor: const Color.fromARGB(255, 172, 92, 65),
+                constraints: const BoxConstraints(
+                  minHeight: 50.0,
+                  minWidth: 165.0,
                 ),
+                children: getOption(context).map((option) => Text(option,
+                  style: const TextStyle(
+                      fontSize: 30.0,
+                      color: Colors.white
+                    ),
+                  )).toList(),
+                )
               ),
             ],
           ),

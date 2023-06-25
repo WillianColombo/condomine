@@ -5,15 +5,15 @@ class Dificuldade {
   
   Dificuldade(this._colunas, this._menosLinhas, this._qtdBombas);
 
-  int get colunas => this._colunas;
+  int get colunas => _colunas;
 
-  set colunas(int value) => this._colunas = value;
+  set colunas(int value) => _colunas = value;
 
-  int get menosLinhas => this._menosLinhas;
+  int get menosLinhas => _menosLinhas;
 
-  set menosLinhas(int value) => this._menosLinhas = value;
+  set menosLinhas(int value) => _menosLinhas = value;
 
-  double get qtdBombas => this._qtdBombas;
+  double get qtdBombas => _qtdBombas;
 
- set qtdBombas(double value) => this._qtdBombas = value;
+ set qtdBombas(double value) => _qtdBombas = value;
 }

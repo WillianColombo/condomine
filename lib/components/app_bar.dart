@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'package:condomine/screens/main_menu.dart';
 import 'package:flutter/material.dart';
 
 class MyAppBar extends StatefulWidget implements PreferredSizeWidget {
@@ -9,8 +8,7 @@ class MyAppBar extends StatefulWidget implements PreferredSizeWidget {
       onReiniciar; //Método para reiniciar o game, sendo acessado pelo icon na AppBar
   int venceu = 0; // 0 = start | 1 = vitória | 2 = derrota
 
-  MyAppBar(
-      { //Construtor da classe
+  MyAppBar({ //Construtor da classe
       required this.venceu,
       required this.onReiniciar});
 
@@ -76,11 +74,11 @@ class _MyAppBarState extends State<MyAppBar> {
           child: const Icon(Icons.home),
         ),
         actions: [
-          Text(
+          /*Text(
             //Temporizador
             _tempo.toString(),
             style: const TextStyle(fontSize: 24),
-          ),
+          ),*/
           ElevatedButton(
             //Botão para reiniciar
             onPressed: onReiniciar(),

@@ -7,7 +7,7 @@ import 'package:condomine/models/tabuleiro.dart';
 import 'package:flutter/material.dart';
 
 class Game extends StatefulWidget {
-  String nivel;
+  List<bool>? nivel;
 
   Game({required this.nivel});
   @override
@@ -17,7 +17,7 @@ class Game extends StatefulWidget {
 class _GameState extends State<Game> {
   int _venceu = 0; // 0 = start | 1 = vitória | 2 = derrota
   Tabuleiro _tabuleiro = Tabuleiro(colunas: 0, linhas: 0, qtdBombas: 0);
-  String nivel;
+  List<bool>? nivel;
   Dificuldade dificuldade = Dificuldade(0, 0, 0);
 
   _GameState({required this.nivel});
@@ -68,21 +68,26 @@ class _GameState extends State<Game> {
     });
   }
 
-  Dificuldade getDificuldade() {
-    if (nivel == "Fácil") {
-      dificuldade.colunas = 29;
-      dificuldade.menosLinhas = 2;
-      dificuldade.qtdBombas = 0.15;
-    } else if (nivel == "Médio") {
-      dificuldade.colunas = 40;
-      dificuldade.menosLinhas = 3;
-      dificuldade.qtdBombas = 0.2;
-    } else {
-      dificuldade.colunas = 50;
-      dificuldade.menosLinhas = 4;
-      dificuldade.qtdBombas = 0.3;
+  Dificuldade? getDificuldade(){
+    for(int i = 0; i < nivel!.length; i++) {
+      if(nivel![i] == false){
+      } else{
+        if(i == 0){
+          dificuldade.colunas = 29;
+          dificuldade.menosLinhas = 2;
+          dificuldade.qtdBombas = 0.15; 
+        } else if(i == 1){
+          dificuldade.colunas = 40;
+          dificuldade.menosLinhas = 3;
+          dificuldade.qtdBombas = 0.2;
+        } else {
+          dificuldade.colunas = 50;
+          dificuldade.menosLinhas = 4;
+          dificuldade.qtdBombas = 0.3;
+        }
+      return dificuldade;
+      }
     }
-    return dificuldade;
   }
 
   Tabuleiro _getTabuleiro(double largura, double altura) {

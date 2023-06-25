@@ -1,6 +1,5 @@
 import 'package:condomine/components/campo_widget.dart';
 import 'package:condomine/models/campo.dart';
-import 'package:condomine/models/dificuldade.dart';
 import 'package:flutter/material.dart';
 import 'package:condomine/models/tabuleiro.dart';
 

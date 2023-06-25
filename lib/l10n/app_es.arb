@@ -1,3 +1,6 @@
 {
-   "msg_play": "Jugar"
+   "msg_play": "Jugar",
+   "msg_easy": "Fácil",
+   "msg_medium": "Promedio",
+   "msg_hard": "Difícil"
 }
