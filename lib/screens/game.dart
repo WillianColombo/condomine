@@ -18,14 +18,14 @@ class _GameState extends State<Game> {
   int _venceu = 0; // 0 = start | 1 = vitória | 2 = derrota
   Tabuleiro _tabuleiro = Tabuleiro(colunas: 0, linhas: 0, qtdBombas: 0);
   List<bool>? nivel;
-  Dificuldade dificuldade = Dificuldade(0, 0, 0);
+  Dificuldade _dificuldade = Dificuldade(0, 0, 0);
 
   _GameState({required this.nivel});
 
   @override
   void initState() {
     super.initState();
-    getDificuldade();
+    _getDificuldade();
     _tabuleiro = _getTabuleiro(1920, 1080);
     _reiniciar();
   }
@@ -68,36 +68,36 @@ class _GameState extends State<Game> {
     });
   }
 
-  Dificuldade? getDificuldade(){
+  Dificuldade? _getDificuldade(){
     for(int i = 0; i < nivel!.length; i++) {
       if(nivel![i] == false){
       } else{
         if(i == 0){
-          dificuldade.colunas = 29;
-          dificuldade.menosLinhas = 2;
-          dificuldade.qtdBombas = 0.15; 
+          _dificuldade.colunas = 29;
+          _dificuldade.menosLinhas = 2;
+          _dificuldade.qtdBombas = 0.15; 
         } else if(i == 1){
-          dificuldade.colunas = 40;
-          dificuldade.menosLinhas = 3;
-          dificuldade.qtdBombas = 0.2;
+          _dificuldade.colunas = 40;
+          _dificuldade.menosLinhas = 3;
+          _dificuldade.qtdBombas = 0.2;
         } else {
-          dificuldade.colunas = 50;
-          dificuldade.menosLinhas = 4;
-          dificuldade.qtdBombas = 0.3;
+          _dificuldade.colunas = 50;
+          _dificuldade.menosLinhas = 4;
+          _dificuldade.qtdBombas = 0.3;
         }
-      return dificuldade;
+      return _dificuldade;
       }
     }
   }
 
   Tabuleiro _getTabuleiro(double largura, double altura) {
-    int qtdeColunas = dificuldade.colunas;
+    int qtdeColunas = _dificuldade.colunas;
     double tamanhoCampo = largura / qtdeColunas;
     int qtdeLinhas =
-        ((altura / tamanhoCampo) - dificuldade.menosLinhas).floor();
+        ((altura / tamanhoCampo) - _dificuldade.menosLinhas).floor();
 
     int qtdBombaCalc =
-        ((qtdeLinhas * qtdeColunas) * dificuldade.qtdBombas).floor();
+        ((qtdeLinhas * qtdeColunas) * _dificuldade.qtdBombas).floor();
     //Cria dinamicamente a quantidade de bombas, neste caso, 20% do total de campos
 
     _tabuleiro = Tabuleiro(

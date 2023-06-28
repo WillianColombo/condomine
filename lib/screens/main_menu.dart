@@ -10,12 +10,12 @@ class MainMenu extends StatefulWidget {
 }
 
 class _MainMenuState extends State<MainMenu> {
-  List<String> options = [];
-  List<bool>? selectedOptions = <bool>[false, true, false];
+  List<String> _options = [];
+  List<bool>? _selectedOptions = <bool>[false, true, false];
 
-  List<String> getOption(BuildContext context){
-    options = [AppLocalizations.of(context)!.msg_easy, AppLocalizations.of(context)!.msg_medium, AppLocalizations.of(context)!.msg_hard ];
-    return options;
+  List<String> _getOption(BuildContext context){
+    _options = [AppLocalizations.of(context)!.msg_easy, AppLocalizations.of(context)!.msg_medium, AppLocalizations.of(context)!.msg_hard ];
+    return _options;
   }
 
    @override
@@ -30,14 +30,7 @@ class _MainMenuState extends State<MainMenu> {
             children: [
               Container(
                 margin: const EdgeInsets.all(50.0),
-                child: const Text(
-                  "CONDOMINE",
-                  style: TextStyle(
-                    fontSize: 50.0,
-                    fontWeight: FontWeight.bold,
-                    color: Color.fromARGB(255, 109, 54, 35),
-                  ),
-                ),
+                child: Image.asset("assets/images/gif_logo.gif", width: 400, height: 400,)
               ),
               Container(
                 width: 500,
@@ -46,7 +39,7 @@ class _MainMenuState extends State<MainMenu> {
                 child: ElevatedButton(
                   onPressed: () => Navigator.of(context).push(MaterialPageRoute(
                       builder: (context) => Game(
-                            nivel: selectedOptions,
+                            nivel: _selectedOptions,
                           ))),
                   style: ButtonStyle(
                     backgroundColor:
@@ -71,18 +64,18 @@ class _MainMenuState extends State<MainMenu> {
                 child: ToggleButtons(
                   onPressed: (int index) {
                   setState(() {
-                    for (int i = 0; i < selectedOptions!.length; i++) {
-                      selectedOptions![i] = i == index;
+                    for (int i = 0; i < _selectedOptions!.length; i++) {
+                      _selectedOptions![i] = i == index;
                     }
                   });
                 },
-                isSelected: selectedOptions!,
+                isSelected: _selectedOptions!,
                 fillColor: const Color.fromARGB(255, 172, 92, 65),
                 constraints: const BoxConstraints(
                   minHeight: 50.0,
                   minWidth: 165.0,
                 ),
-                children: getOption(context).map((option) => Text(option,
+                children: _getOption(context).map((option) => Text(option,
                   style: const TextStyle(
                       fontSize: 30.0,
                       color: Colors.white

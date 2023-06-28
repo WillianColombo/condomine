@@ -4,8 +4,7 @@ import 'package:flutter/material.dart';
 class MyAppBar extends StatefulWidget implements PreferredSizeWidget {
   //const MyAppBar({super.key});
 
-  final Function
-      onReiniciar; //Método para reiniciar o game, sendo acessado pelo icon na AppBar
+  final Function onReiniciar; //Método para reiniciar o game, sendo acessado pelo icon na AppBar
   int venceu = 0; // 0 = start | 1 = vitória | 2 = derrota
 
   MyAppBar({ //Construtor da classe
@@ -23,18 +22,17 @@ class MyAppBar extends StatefulWidget implements PreferredSizeWidget {
 ///////////////////////////////////////////////////////////////////////////////////
 
 class _MyAppBarState extends State<MyAppBar> {
-  final Function
-      onReiniciar; //Método para reiniciar o game, sendo acessado pelo icon na AppBar
+  final Function onReiniciar; //Método para reiniciar o game, sendo acessado pelo icon na AppBar
   int venceu = 0; // 0 = start | 1 = vitória | 2 = derrota
-  Timer? timer; //Variável utilizada no temporizador
-  int _tempo = 0;
+  //Timer? timer; //Variável utilizada no temporizador
+  //int _tempo = 0;
 
   _MyAppBarState(
       { //Construtor do state
       required this.venceu,
       required this.onReiniciar});
 
-  @override
+  /*@override
   void initState() {
     super.initState();
     timer = Timer.periodic(const Duration(seconds: 1), (Timer t) {
@@ -46,19 +44,19 @@ class _MyAppBarState extends State<MyAppBar> {
         }
       });
     });
-  }
+  }*/
 
-  void zerarTempo() {
+  /*void zerarTempo() {
     setState(() {
       _tempo = 0;
     });
-  }
+  }*/
 
-  @override
+  /*@override
   void dispose() {
     timer?.cancel();
     super.dispose();
-  }
+  }*/
 
   @override
   Widget build(BuildContext context) {
