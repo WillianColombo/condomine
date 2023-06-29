@@ -19,15 +19,15 @@ class CampoWidget extends StatelessWidget {
     //Método que retorna qual imagem o campo deve possuir. Baseia-se nos estados das variáveis desse campo
     int qtdeMinas = campo.qtdeMinasNaVizinhanca;
     if (campo.aberto && campo.minado && campo.explodido) {
-      return Image.asset('assets/images/bomba_0.jpeg');
+      return Image.asset('assets/images/bomba_0.jpg');
     } else if (campo.aberto && campo.minado) {
-      return Image.asset('assets/images/bomba_1.jpeg');
+      return Image.asset('assets/images/bomba_1.jpg');
     } else if (campo.aberto) {
-      return Image.asset('assets/images/aberto_$qtdeMinas.jpeg');
+      return Image.asset('assets/images/aberto_$qtdeMinas.jpg');
     } else if (campo.marcado) {
-      return Image.asset('assets/images/bandeira.jpeg');
+      return Image.asset('assets/images/bandeira.jpg');
     } else {
-      return Image.asset('assets/images/fechado.jpeg');
+      return Image.asset('assets/images/fechado.jpg');
     }
   }
 
