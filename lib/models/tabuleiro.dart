@@ -1,13 +1,14 @@
 import 'dart:math';
 import 'package:condomine/models/campo.dart';
 
+//Classe lógica o tabuleiro
+
 class Tabuleiro {
   int linhas; //Qtd de linhas do tabuleiro
   int colunas; //Qtd de colunas do tabuleiro
   int qtdBombas; //Qtd de bombas do tabuleiro
 
-  Tabuleiro({
-    //Construtor
+  Tabuleiro({//Construtor
     required this.linhas,
     required this.colunas,
     required this.qtdBombas,
@@ -21,7 +22,7 @@ class Tabuleiro {
   final List<Campo> _campos = []; // Lista para armazenar os campos
 
   void gerarTabuleiro() {
-    //Método que cria os dados em memória do tabuleiro. Ou seja, adiciona os campos na matriz
+//Método que cria os dados em memória do tabuleiro. Ou seja, adiciona os campos na matriz
     for (int linha = 0; linha < linhas; linha++) {
       for (int coluna = 0; coluna < colunas; coluna++) {
         Campo campo = Campo(coluna, linha);
@@ -73,6 +74,7 @@ class Tabuleiro {
   }
 
   bool get resolvido {
+    //Get que retorna se todos os campos do tabuleiros foram resolvidos
     return _campos.every((c) => c.resolvido);
   }
 }

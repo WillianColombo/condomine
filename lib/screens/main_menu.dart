@@ -2,6 +2,8 @@ import 'package:condomine/screens/game.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+//Classe que implementa a tela inicial do aplicativo
+
 class MainMenu extends StatefulWidget {
   const MainMenu({super.key});
 
@@ -10,10 +12,10 @@ class MainMenu extends StatefulWidget {
 }
 
 class _MainMenuState extends State<MainMenu> {
-  List<String> _options = [];
-  List<bool>? _selectedOptions = <bool>[false, true, false];
+  List<String> _options = []; //Lista visual do botão de escolha da dificuldade
+  List<bool>? _selectedOptions = <bool>[false, true, false]; //Lista lógica do botão de escolha da dificuldade
 
-  List<String> _getOption(BuildContext context){
+  List<String> _getOption(BuildContext context){ //Método que implementa as variáveis internacionalizadas ao botão de dificuldade
     _options = [AppLocalizations.of(context)!.msg_easy, AppLocalizations.of(context)!.msg_medium, AppLocalizations.of(context)!.msg_hard ];
     return _options;
   }
@@ -23,12 +25,11 @@ class _MainMenuState extends State<MainMenu> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        backgroundColor: const Color.fromARGB(255, 199, 147, 128),
         body: Center(
-          child: Container(
+          child: Container( //Adiciona o background gradient 
             width: 1920,
             height: 1080,
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             gradient: LinearGradient(
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
@@ -39,11 +40,11 @@ class _MainMenuState extends State<MainMenu> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Container(
+                Container( //Gif da logo do game
                   margin: const EdgeInsets.all(50.0),
                   child: Image.asset("assets/images/gif_logo.gif", width: 400, height: 400,)
                 ),
-                Container(
+                Container( //Botão de jogar que navega até a classe game.dart
                   width: 500,
                   height: 50,
                   margin: const EdgeInsets.all(16.0),
@@ -66,7 +67,7 @@ class _MainMenuState extends State<MainMenu> {
                     ),
                   ),
                 ),
-                Container(
+                Container( //Botão com as opções de dificuldade. A opção "Médio" vem por padrão
                   decoration: const BoxDecoration(color:  Color.fromARGB(255, 109, 54, 35)),
                   width: 500,
                   height: 50,

@@ -6,8 +6,10 @@ import 'package:condomine/models/explosao_exception.dart';
 import 'package:condomine/models/tabuleiro.dart';
 import 'package:flutter/material.dart';
 
+//Classe do jogo, na qual conecta todos os elementos 
+
 class Game extends StatefulWidget {
-  List<bool>? nivel;
+  List<bool>? nivel; //Escolha da dificuldade feita na tela inicial
 
   Game({required this.nivel});
   @override
@@ -16,12 +18,13 @@ class Game extends StatefulWidget {
 
 class _GameState extends State<Game> {
   int _venceu = 0; // 0 = start | 1 = vitória | 2 = derrota
-  Tabuleiro _tabuleiro = Tabuleiro(colunas: 0, linhas: 0, qtdBombas: 0);
-  List<bool>? nivel;
-  Dificuldade _dificuldade = Dificuldade(0, 0, 0);
+  Tabuleiro _tabuleiro = Tabuleiro(colunas: 0, linhas: 0, qtdBombas: 0); //Inicializa o tabuleiro zerado
+  List<bool>? nivel; //Escolha da dificuldade feita na tela inicial
+  Dificuldade _dificuldade = Dificuldade(0, 0, 0); //Inicializa a dificuldade zerada
 
-  _GameState({required this.nivel});
+  _GameState({required this.nivel});//Requer a variável nível
 
+  //InitState
   @override
   void initState() {
     super.initState();
@@ -30,6 +33,7 @@ class _GameState extends State<Game> {
     _reiniciar();
   }
 
+  //Método chamado a partir do botão da AppBar. Aciona o método reiniciar da classe Tabuleiro
   void _reiniciar() {
     setState(() {
       _venceu = 0;
@@ -37,6 +41,7 @@ class _GameState extends State<Game> {
     });
   }
 
+  //Método que abre os campos a partir do onTap
   void _abrir(Campo campo) {
     if (_venceu != 0) {
       return;
@@ -55,6 +60,7 @@ class _GameState extends State<Game> {
     });
   }
 
+  //Método que adiciona uma bandeira no campo, acionado a partir do longPress
   void _alternarFlag(Campo campo) {
     if (_venceu != 0) {
       return;
@@ -68,6 +74,7 @@ class _GameState extends State<Game> {
     });
   }
 
+  //Método que retorna os valores para a dificuldade, na qual foi escolhida previamente na tela inicial
   Dificuldade? _getDificuldade(){
     for(int i = 0; i < nivel!.length; i++) {
       if(nivel![i] == false){
@@ -90,16 +97,21 @@ class _GameState extends State<Game> {
     }
   }
 
+  //Método que gera o tabuleiro lógico a ser utilizado
   Tabuleiro _getTabuleiro(double largura, double altura) {
+    //Quantidade de colunas absoluta definida pela dificuldade
     int qtdeColunas = _dificuldade.colunas;
+
+    //Calcula o tamanho do campo a partir da largura da tela e quantidade de colunas
     double tamanhoCampo = largura / qtdeColunas;
-    int qtdeLinhas =
-        ((altura / tamanhoCampo) - _dificuldade.menosLinhas).floor();
 
-    int qtdBombaCalc =
-        ((qtdeLinhas * qtdeColunas) * _dificuldade.qtdBombas).floor();
+    //Calcula a quantidade de linhas a partir da altura da tela e tamanho do campo. Subtrai a quantidade necessária para que fique certo na tela
+    int qtdeLinhas = ((altura / tamanhoCampo) - _dificuldade.menosLinhas).floor();
+
     //Cria dinamicamente a quantidade de bombas, neste caso, 20% do total de campos
+    int qtdBombaCalc = ((qtdeLinhas * qtdeColunas) * _dificuldade.qtdBombas).floor();
 
+    //Insere ao objeto zerado, os valores a serem utilizados
     _tabuleiro = Tabuleiro(
       linhas: qtdeLinhas,
       colunas: qtdeColunas,
@@ -113,8 +125,8 @@ class _GameState extends State<Game> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        appBar: MyAppBar(onReiniciar: () => _reiniciar, venceu: _venceu),
-        body: Container(
+        appBar: MyAppBar(onReiniciar: () => _reiniciar, venceu: _venceu), //Chama a classe app_bar.dart
+        body: Container( //Container que agrega o GridView da clase TabuleiroWidget
           color: Colors.grey,
           child: LayoutBuilder(
             builder: (ctx, constraints) {

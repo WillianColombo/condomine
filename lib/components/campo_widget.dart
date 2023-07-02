@@ -1,6 +1,8 @@
 import 'package:condomine/models/campo.dart';
 import 'package:flutter/material.dart';
 
+//Classe que implementa a parte visual dos campos
+
 class CampoWidget extends StatelessWidget {
   final Campo campo;
   final void Function(Campo)
@@ -31,6 +33,7 @@ class CampoWidget extends StatelessWidget {
     }
   }
 
+  //Widget que retorna o getImage
   @override
   Widget build(BuildContext context) {
     return InkWell(

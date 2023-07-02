@@ -3,6 +3,8 @@ import 'package:condomine/models/campo.dart';
 import 'package:flutter/material.dart';
 import 'package:condomine/models/tabuleiro.dart';
 
+//Classe que implementa a parte visual do tabuleiro
+
 class TabuleiroWidget extends StatelessWidget {
   Tabuleiro tabuleiro;
   final void Function(Campo)
@@ -17,6 +19,7 @@ class TabuleiroWidget extends StatelessWidget {
     required this.onAlternarFlag,
   });
 
+  //Widget que gera o GridView do tabuleiro
   @override
   Widget build(BuildContext context) {
     return Container(

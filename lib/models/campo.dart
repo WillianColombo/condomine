@@ -1,5 +1,7 @@
 import 'package:condomine/models/explosao_exception.dart';
 
+//Classe lógica para as unidades campos do tabuleiro
+
 class Campo {
   int coluna;
   int linha;
