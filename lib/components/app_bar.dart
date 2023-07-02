@@ -6,10 +6,10 @@ import 'package:flutter/material.dart';
 class MyAppBar extends StatefulWidget implements PreferredSizeWidget {
 
   final Function onReiniciar; //Método para reiniciar o game, sendo acessado pelo icon na AppBar
-  int venceu = 0; // 0 = start | 1 = vitória | 2 = derrota
+  int resultado = 0; // 0 = start | 1 = vitória | 2 = derrota
 
   MyAppBar({ //Construtor da classe
-      required this.venceu,
+      required this.resultado,
       required this.onReiniciar});
 
   @override //Propriedade para utilizar a AppBar, implementada pelo PreferredSizeWidget
@@ -17,14 +17,14 @@ class MyAppBar extends StatefulWidget implements PreferredSizeWidget {
 
   @override
   State<MyAppBar> createState() =>
-      _MyAppBarState(onReiniciar: onReiniciar, venceu: venceu);
+      _MyAppBarState(onReiniciar: onReiniciar, resultado: resultado);
 }
 
 ///////////////////////////////////////////////////////////////////////////////////
 
 class _MyAppBarState extends State<MyAppBar> {
   final Function onReiniciar; //Método para reiniciar o game, sendo acessado pelo icon na AppBar
-  int venceu = 0; // 0 = start | 1 = vitória | 2 = derrota
+  int resultado = 0; // 0 = start | 1 = vitória | 2 = derrota
   
   //Variáveis utilizadas para o temporizador
   /*Timer? timer; //Variável utilizada no temporizador
@@ -32,7 +32,7 @@ class _MyAppBarState extends State<MyAppBar> {
 
   _MyAppBarState(
       { //Construtor do state
-      required this.venceu,
+      required this.resultado,
       required this.onReiniciar});
 
   //Inicializa o temporizador
@@ -41,7 +41,7 @@ class _MyAppBarState extends State<MyAppBar> {
     super.initState();
     timer = Timer.periodic(const Duration(seconds: 1), (Timer t) {
       setState(() {
-        if (venceu == 0) {
+        if (resultado == 0) {
           _tempo++;
         } else {
           timer!.cancel();

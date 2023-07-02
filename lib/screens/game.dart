@@ -1,5 +1,6 @@
 import 'package:condomine/components/app_bar.dart';
 import 'package:condomine/components/tabuleiro_widget.dart';
+import 'package:condomine/components/vencer_mensagem.dart';
 import 'package:condomine/models/campo.dart';
 import 'package:condomine/models/dificuldade.dart';
 import 'package:condomine/models/explosao_exception.dart';
@@ -17,7 +18,7 @@ class Game extends StatefulWidget {
 }
 
 class _GameState extends State<Game> {
-  int _venceu = 0; // 0 = start | 1 = vitória | 2 = derrota
+  int _resultado = 0; // 0 = start | 1 = vitória | 2 = derrota
   Tabuleiro _tabuleiro = Tabuleiro(colunas: 0, linhas: 0, qtdBombas: 0); //Inicializa o tabuleiro zerado
   List<bool>? nivel; //Escolha da dificuldade feita na tela inicial
   Dificuldade _dificuldade = Dificuldade(0, 0, 0); //Inicializa a dificuldade zerada
@@ -36,14 +37,14 @@ class _GameState extends State<Game> {
   //Método chamado a partir do botão da AppBar. Aciona o método reiniciar da classe Tabuleiro
   void _reiniciar() {
     setState(() {
-      _venceu = 0;
+      _resultado = 0;
       _tabuleiro.reiniciar();
     });
   }
 
   //Método que abre os campos a partir do onTap
   void _abrir(Campo campo) {
-    if (_venceu != 0) {
+    if (_resultado != 0) {
       return;
     }
 
@@ -51,10 +52,10 @@ class _GameState extends State<Game> {
       try {
         campo.abrir();
         if (_tabuleiro.resolvido) {
-          _venceu = 1;
+          _resultado = 1;
         }
       } on ExplosaoException {
-        _venceu = 2;
+        _resultado = 2;
         _tabuleiro.revelarBombas();
       }
     });
@@ -62,14 +63,14 @@ class _GameState extends State<Game> {
 
   //Método que adiciona uma bandeira no campo, acionado a partir do longPress
   void _alternarFlag(Campo campo) {
-    if (_venceu != 0) {
+    if (_resultado != 0) {
       return;
     }
 
     setState(() {
       campo.alternarFlag();
       if (_tabuleiro.resolvido) {
-        _venceu = 1;
+        _resultado = 1;
       }
     });
   }
@@ -86,7 +87,7 @@ class _GameState extends State<Game> {
         } else if(i == 1){
           _dificuldade.colunas = 40;
           _dificuldade.menosLinhas = 3;
-          _dificuldade.qtdBombas = 0.2;
+          //_dificuldade.qtdBombas = 0.2;
         } else {
           _dificuldade.colunas = 50;
           _dificuldade.menosLinhas = 4;
@@ -122,10 +123,20 @@ class _GameState extends State<Game> {
 
   @override
   Widget build(BuildContext context) {
+    if(_resultado == 1){
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return const VencerWidget();
+          },
+        );
+      });
+    }
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        appBar: MyAppBar(onReiniciar: () => _reiniciar, venceu: _venceu), //Chama a classe app_bar.dart
+        appBar: MyAppBar(onReiniciar: () => _reiniciar, resultado: _resultado), //Chama a classe app_bar.dart
         body: Container( //Container que agrega o GridView da clase TabuleiroWidget
           color: Colors.grey,
           child: LayoutBuilder(
