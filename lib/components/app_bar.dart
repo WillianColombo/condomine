@@ -1,8 +1,7 @@
 import 'dart:async';
-import 'package:audioplayers/audioplayers.dart';
+//import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 
-import '../main.dart';
 
 //Classe que implementa a AppBar do aplicativo
 
@@ -72,10 +71,9 @@ class _MyAppBarState extends State<MyAppBar> {
         backgroundColor: const Color.fromARGB(255, 199, 147, 128),
         leading: ElevatedButton(
           //Botão para voltar a tela inicial
-          onPressed:() => Navigator.of(context, rootNavigator: true).pop(player.play(DeviceFileSource('assets/sons/condominesoudtrack.mp3',))), 
+          onPressed:() => Navigator.of(context, rootNavigator: true).pop(), 
           style: ButtonStyle(backgroundColor:
               MaterialStateProperty.resolveWith<Color?>((states) {
-                player.setVolume(0.15);
             return const Color.fromARGB(255, 109, 54, 35);
             
           })),
