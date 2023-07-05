@@ -1,7 +1,7 @@
 import 'package:condomine/screens/game.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:audioplayers/audioplayers.dart';
+//import 'package:audioplayers/audioplayers.dart';
 
 //Classe que implementa a tela inicial do aplicativo
 
@@ -16,7 +16,7 @@ class MainMenu extends StatefulWidget {
 class _MainMenuState extends State<MainMenu> {
   List<String> _options = []; //Lista visual do botão de escolha da dificuldade
   List<bool>? _selectedOptions = <bool>[false, true, false]; //Lista lógica do botão de escolha da dificuldade
-  final player = AudioPlayer();
+  //final player = AudioPlayer();
   List<String> _getOption(BuildContext context){ //Método que implementa as variáveis internacionalizadas ao botão de dificuldade
     _options = [AppLocalizations.of(context)!.msg_easy, AppLocalizations.of(context)!.msg_medium, AppLocalizations.of(context)!.msg_hard ];
     return _options;
@@ -77,8 +77,8 @@ class _MainMenuState extends State<MainMenu> {
                   alignment: Alignment.center,
                   child: ToggleButtons(
                     onPressed: (int index) {
-                      player.play(DeviceFileSource('assets/sons/choose.mp3'));
-                      player.stop();
+                    //  player.play(DeviceFileSource('assets/sons/choose.mp3'));
+                    //  player.stop();
                     setState(() {
                       for (int i = 0; i < _selectedOptions!.length; i++) {
                         _selectedOptions![i] = i == index;

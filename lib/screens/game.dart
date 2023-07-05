@@ -6,7 +6,7 @@ import 'package:condomine/models/dificuldade.dart';
 import 'package:condomine/models/explosao_exception.dart';
 import 'package:condomine/models/tabuleiro.dart';
 import 'package:flutter/material.dart';
-import 'package:audioplayers/audioplayers.dart';
+//import 'package:audioplayers/audioplayers.dart';
 
 //Classe do jogo, na qual conecta todos os elementos 
 
@@ -23,7 +23,7 @@ class _GameState extends State<Game> {
   Tabuleiro _tabuleiro = Tabuleiro(colunas: 0, linhas: 0, qtdBombas: 0); //Inicializa o tabuleiro zerado
   List<bool>? nivel; //Escolha da dificuldade feita na tela inicial
   Dificuldade _dificuldade = Dificuldade(0, 0, 0); //Inicializa a dificuldade zerada
-  final player = AudioPlayer();
+  //final player = AudioPlayer();
 
   _GameState({required this.nivel});//Requer a variável nível
   //InitState
@@ -33,7 +33,7 @@ class _GameState extends State<Game> {
     _getDificuldade();
     _tabuleiro = _getTabuleiro(1920, 1080);
     _reiniciar();
-    player.play(DeviceFileSource('assets/sons/start.mp3'));
+    //player.play(DeviceFileSource('assets/sons/start.mp3'));
   }
 
   //Método chamado a partir do botão da AppBar. Aciona o método reiniciar da classe Tabuleiro
@@ -41,14 +41,14 @@ class _GameState extends State<Game> {
     setState(() {
       _resultado = 0;
       _tabuleiro.reiniciar();
-       player.stop();
+       //player.stop();
     });
   }
 
   //Método que abre os campos a partir do onTap
   void _abrir(Campo campo) {
-    player.play(DeviceFileSource('assets/sons/open.mp3'));
-    player.stop();
+   // player.play(DeviceFileSource('assets/sons/open.mp3'));
+   // player.stop();
     if (_resultado != 0) {
       return;
     }
@@ -58,7 +58,7 @@ class _GameState extends State<Game> {
         campo.abrir();
         if (_tabuleiro.resolvido) {
           _resultado = 1;
-          player.play(DeviceFileSource('assets/sons/sucess.mp3')); // som de sucesso
+         // player.play(DeviceFileSource('assets/sons/sucess.mp3')); // som de sucesso
         }
       } on ExplosaoException {
         _resultado = 2;
@@ -73,7 +73,7 @@ class _GameState extends State<Game> {
 
   //Método que adiciona uma bandeira no campo, acionado a partir do longPress
   void _alternarFlag(Campo campo) {
-    player.play(DeviceFileSource('assets/sons/flag.mp3')); //som de bandeira sendo posta
+    //player.play(DeviceFileSource('assets/sons/flag.mp3')); //som de bandeira sendo posta
     if (_resultado != 0) {
       return;
       
