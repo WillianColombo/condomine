@@ -43,18 +43,20 @@ class Campo {
     _flag = false;
     _minado = false;
     _explodido = false;
+    
   }
-
   void revelarBomba() {
     //Se o campo estiver minado, revela a bomba. Isto ocorre quando o game é perdido
     if (_minado) {
       _aberto = true;
+      
     }
   }
 
   void abrir() {
     //Método que abre o campo
     if (_aberto) {
+      
       return;
     }
 

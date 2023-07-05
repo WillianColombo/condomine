@@ -1,4 +1,6 @@
 import 'dart:math';
+import 'package:audioplayers/audioplayers.dart';
+import 'package:condomine/main.dart';
 import 'package:condomine/models/campo.dart';
 
 //Classe lógica o tabuleiro
@@ -40,6 +42,8 @@ class Tabuleiro {
   void revelarBombas() {
     //Quando o jogo for perdido, revela todos os campos incluindo bombas
     _campos.forEach((c) => c.revelarBomba());
+    player.play(DeviceFileSource('assets/sons/explosao.mp3'));
+    player.setVolume(0.5);
   }
 
   void _relacionarVizinhos() {

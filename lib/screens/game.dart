@@ -6,6 +6,7 @@ import 'package:condomine/models/dificuldade.dart';
 import 'package:condomine/models/explosao_exception.dart';
 import 'package:condomine/models/tabuleiro.dart';
 import 'package:flutter/material.dart';
+import 'package:audioplayers/audioplayers.dart';
 
 //Classe do jogo, na qual conecta todos os elementos 
 
@@ -17,14 +18,14 @@ class Game extends StatefulWidget {
   _GameState createState() => _GameState(nivel: nivel);
 }
 
-class _GameState extends State<Game> {
+class _GameState extends State<Game> { 
   int _resultado = 0; // 0 = start | 1 = vitória | 2 = derrota
   Tabuleiro _tabuleiro = Tabuleiro(colunas: 0, linhas: 0, qtdBombas: 0); //Inicializa o tabuleiro zerado
   List<bool>? nivel; //Escolha da dificuldade feita na tela inicial
   Dificuldade _dificuldade = Dificuldade(0, 0, 0); //Inicializa a dificuldade zerada
+  final player = AudioPlayer();
 
   _GameState({required this.nivel});//Requer a variável nível
-
   //InitState
   @override
   void initState() {
@@ -32,6 +33,7 @@ class _GameState extends State<Game> {
     _getDificuldade();
     _tabuleiro = _getTabuleiro(1920, 1080);
     _reiniciar();
+    player.play(DeviceFileSource('assets/sons/start.mp3'));
   }
 
   //Método chamado a partir do botão da AppBar. Aciona o método reiniciar da classe Tabuleiro
@@ -39,11 +41,14 @@ class _GameState extends State<Game> {
     setState(() {
       _resultado = 0;
       _tabuleiro.reiniciar();
+       player.stop();
     });
   }
 
   //Método que abre os campos a partir do onTap
   void _abrir(Campo campo) {
+    player.play(DeviceFileSource('assets/sons/open.mp3'));
+    player.stop();
     if (_resultado != 0) {
       return;
     }
@@ -53,18 +58,25 @@ class _GameState extends State<Game> {
         campo.abrir();
         if (_tabuleiro.resolvido) {
           _resultado = 1;
+          player.play(DeviceFileSource('assets/sons/sucess.mp3')); // som de sucesso
         }
       } on ExplosaoException {
         _resultado = 2;
         _tabuleiro.revelarBombas();
+        //player.pause();
+        //player.play(DeviceFileSource('assets/sons/explosao.mp3')); // som de explosao
+        //player.setVolume(0.5);
       }
+      ;
     });
   }
 
   //Método que adiciona uma bandeira no campo, acionado a partir do longPress
   void _alternarFlag(Campo campo) {
+    player.play(DeviceFileSource('assets/sons/flag.mp3')); //som de bandeira sendo posta
     if (_resultado != 0) {
       return;
+      
     }
 
     setState(() {
@@ -76,7 +88,7 @@ class _GameState extends State<Game> {
   }
 
   //Método que retorna os valores para a dificuldade, na qual foi escolhida previamente na tela inicial
-  Dificuldade? _getDificuldade(){
+  Dificuldade? _getDificuldade(){;
     for(int i = 0; i < nivel!.length; i++) {
       if(nivel![i] == false){
       } else{
@@ -87,7 +99,7 @@ class _GameState extends State<Game> {
         } else if(i == 1){
           _dificuldade.colunas = 40;
           _dificuldade.menosLinhas = 3;
-          //_dificuldade.qtdBombas = 0.2;
+          _dificuldade.qtdBombas = 0.2;
         } else {
           _dificuldade.colunas = 50;
           _dificuldade.menosLinhas = 4;
@@ -119,6 +131,7 @@ class _GameState extends State<Game> {
       qtdBombas: qtdBombaCalc,
     );
     return _tabuleiro;
+    
   }
 
   @override
@@ -145,6 +158,7 @@ class _GameState extends State<Game> {
                 tabuleiro: _tabuleiro,
                 onAbrir: _abrir,
                 onAlternarFlag: _alternarFlag,
+                
               );
             },
           ),

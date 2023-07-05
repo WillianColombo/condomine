@@ -1,5 +1,8 @@
 import 'dart:async';
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
+
+import '../main.dart';
 
 //Classe que implementa a AppBar do aplicativo
 
@@ -18,6 +21,7 @@ class MyAppBar extends StatefulWidget implements PreferredSizeWidget {
   @override
   State<MyAppBar> createState() =>
       _MyAppBarState(onReiniciar: onReiniciar, resultado: resultado);
+      
 }
 
 ///////////////////////////////////////////////////////////////////////////////////
@@ -62,21 +66,23 @@ class _MyAppBarState extends State<MyAppBar> {
     timer?.cancel();
     super.dispose();
   }*/
-
   @override
   Widget build(BuildContext context) {
     return AppBar(
         backgroundColor: const Color.fromARGB(255, 199, 147, 128),
         leading: ElevatedButton(
           //Botão para voltar a tela inicial
-          onPressed: () => Navigator.of(context, rootNavigator: true).pop(),
+          onPressed:() => Navigator.of(context, rootNavigator: true).pop(player.play(DeviceFileSource('assets/sons/condominesoudtrack.mp3',))), 
           style: ButtonStyle(backgroundColor:
               MaterialStateProperty.resolveWith<Color?>((states) {
+                player.setVolume(0.15);
             return const Color.fromARGB(255, 109, 54, 35);
+            
           })),
           child: const Icon(Icons.home),
         ),
         actions: [
+          
           /*Text(
             //Temporizador
             _tempo.toString(),
